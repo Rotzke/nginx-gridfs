@@ -362,7 +362,7 @@ static ngx_int_t ngx_http_gridfs_handler(ngx_http_request_t* request) {
     bson_init(&filter);
     bson_init(&opts);
     bson_oid_init_from_string(&oid, (const char*)value);
-    bson_append_oid(&filter, "_id", -1, &oid);
+    bson_append_oid(&filter, "filename", -1, &oid);
     gfile = mongoc_gridfs_find_one_with_opts(gridfs, &filter, &opts, &error);
 
     bson_destroy (&filter);
