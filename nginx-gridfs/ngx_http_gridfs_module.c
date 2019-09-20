@@ -399,7 +399,7 @@ static ngx_int_t ngx_http_gridfs_handler(ngx_http_request_t* request) {
     	    iov.iov_base = (void *) gbuffer;
     	    iov.iov_len = ALLOC_BUFFER_SIZE;
     		r = mongoc_stream_readv(stream, &iov, 1, -1, 0);
-    		assert (r>=0);
+    		//assert (r>=0);
     		if (r==0){
    			break;
     		}
