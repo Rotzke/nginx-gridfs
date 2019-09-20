@@ -309,7 +309,7 @@ static ngx_int_t ngx_http_gridfs_handler(ngx_http_request_t* request) {
     volatile ssize_t recv_length=0;
     ngx_int_t rc = NGX_OK;
     bson_t filter;
-    bson_t opts;
+    bson_t opts = NULL;
     bson_oid_t oid;
 
     gridfs_conf = ngx_http_get_module_loc_conf(request, ngx_http_gridfs_module);
@@ -360,9 +360,9 @@ static ngx_int_t ngx_http_gridfs_handler(ngx_http_request_t* request) {
         return NGX_HTTP_BAD_REQUEST;
     }
     bson_init(&filter);
-    bson_init(&opts);
+    //bson_init(&opts);
     bson_oid_init_from_string(&oid, (const char*)value);
-    bson_append_oid(&filter, "filename", -1, &oid);
+    bson_append_oid(&filter, "_id", -1, &oid);
     gfile = mongoc_gridfs_find_one_with_opts(gridfs, &filter, &opts, &error);
 
     bson_destroy (&filter);
