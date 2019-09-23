@@ -341,7 +341,7 @@ static ngx_int_t ngx_http_gridfs_handler(ngx_http_request_t* request) {
         return NGX_HTTP_INTERNAL_SERVER_ERROR;
     }
     memcpy(value, full_uri.data + location_name.len, full_uri.len - location_name.len);
-    //value[full_uri.len - location_name.len] = '\0';
+    value[full_uri.len - location_name.len] = '\0';
 
     if (!url_decode((char*)value)) {
         ngx_log_error(NGX_LOG_ERR, request->connection->log, 0,
@@ -361,7 +361,7 @@ static ngx_int_t ngx_http_gridfs_handler(ngx_http_request_t* request) {
     }
     bson_init(&filter);
     bson_init(&opts);
-    bson_oid_init_from_string(&oid, (const char*)value);
+    bson_oid_init_from_string(&oid, (const char*)full_uri.data);
     bson_append_oid(&filter, "_id", -1, &oid);
     gfile = mongoc_gridfs_find_one_with_opts(gridfs, &filter, &opts, &error);
 
