@@ -340,7 +340,7 @@ static ngx_int_t ngx_http_gridfs_handler(ngx_http_request_t* request) {
                       "Failed to allocate memory for value buffer.");
         return NGX_HTTP_INTERNAL_SERVER_ERROR;
     }
-    memcpy(value, full_uri.data + location_name.len, full_uri.len - location_name.len + 1);
+    memcpy(value, full_uri.data + (location_name.len + 1), full_uri.len - location_name.len);
     value[full_uri.len - location_name.len] = '\0';
 
     if (!url_decode((char*)value)) {
