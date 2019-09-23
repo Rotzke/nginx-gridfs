@@ -334,7 +334,8 @@ static ngx_int_t ngx_http_gridfs_handler(ngx_http_request_t* request) {
                       "Invalid location name or uri.");
         return NGX_HTTP_INTERNAL_SERVER_ERROR;
     }
-    value = ngx_pcalloc(request->pool,sizeof(char) * (full_uri.len - location_name.len + 1));
+    //value = ngx_pcalloc(request->pool,sizeof(char) * (full_uri.len - location_name.len + 1));
+    value = ngx_pcalloc(request->pool,sizeof(char) * 25);
     if (value == NULL) {
         ngx_log_error(NGX_LOG_ERR, request->connection->log, 0,
                       "Failed to allocate memory for value buffer.");
