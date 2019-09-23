@@ -361,7 +361,7 @@ static ngx_int_t ngx_http_gridfs_handler(ngx_http_request_t* request) {
     }
     bson_init(&filter);
     bson_init(&opts);
-    char nikita[25] = "5d84d3b4c2841b52d13e6ec";
+    char nikita[25] = location.name;
     bson_oid_init_from_string(&oid, (const char*)nikita);
     bson_append_oid(&filter, "_id", -1, &oid);
     gfile = mongoc_gridfs_find_one_with_opts(gridfs, &filter, &opts, &error);
