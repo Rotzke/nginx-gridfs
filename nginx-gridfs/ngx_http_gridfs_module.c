@@ -361,10 +361,7 @@ static ngx_int_t ngx_http_gridfs_handler(ngx_http_request_t* request) {
     }
     bson_init(&filter);
     bson_init(&opts);
-    int location_len;
-    location_len = location_name.len;
-    char nikita[location_len] = location_name.data;
-    bson_oid_init_from_string(&oid, (const char*)nikita);
+    bson_oid_init_from_string(&oid, (const char*)location_name.data);
     bson_append_oid(&filter, "_id", -1, &oid);
     gfile = mongoc_gridfs_find_one_with_opts(gridfs, &filter, &opts, &error);
 
